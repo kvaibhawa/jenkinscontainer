@@ -16,19 +16,3 @@ RUN [ "rm", "-rf", "/var/lib/apt/lists/*", "/tmp/*", "/var/tmp/*" ]
 
 #Install cpan modules
 RUN ["cpanm", "Proc::ProcessTable", "Data::Dumper" ]
-
-# Install dependencies python
-RUN apt-get update && apt-get install -y \
-    php5-mcrypt \
-    python-pip
-    
-RUN pip install awscli
-
-RUN aws s3 cp s3://perlcontainertest/perlcontainertest.pl .
-
-#Copy script.pl and  make executable
-COPY [ "./ps.pl", "/app/ps.pl" ]
-RUN [ "chmod", "+x",  "/app/ps.pl" ]
-
-#Set entrypoint of script.pl
-ENTRYPOINT [ "/app/ps.pl" ]

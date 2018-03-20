@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
  
 #Setup basic environment
-ENV DEBIAN_FRONTEND=noninteractive LANG=en_US.UTF-8 LC_ALL=C.UTF-8 LANGUAGE=en_US.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive apt-get install -qy python-pip groff-base LANG=en_US.UTF-8 LC_ALL=C.UTF-8 LANGUAGE=en_US.UTF-8
 
 #Update system and install packages
 RUN [ "apt-get", "-q", "update" ]
@@ -16,3 +16,14 @@ RUN [ "rm", "-rf", "/var/lib/apt/lists/*", "/tmp/*", "/var/tmp/*" ]
 
 #Install cpan modules
 RUN ["cpanm", "Proc::ProcessTable", "Data::Dumper" ]
+
+RUN pip install awscli
+
+RUN aws s3 cp s3://perlcontainertest/perlcontainertest.pl .
+
+#Copy script.pl and  make executable
+COPY [ "./ps.pl", "/app/ps.pl" ]
+RUN [ "chmod", "+x",  "/app/ps.pl" ]
+
+#Set entrypoint of script.pl
+ENTRYPOINT [ "/app/ps.pl" ]

@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
  
 #Setup basic environment
-ENV DEBIAN_FRONTEND=noninteractive apt-get install -qy python-pip groff-base LANG=en_US.UTF-8 LC_ALL=C.UTF-8 LANGUAGE=en_US.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive LANG=en_US.UTF-8 LC_ALL=C.UTF-8 LANGUAGE=en_US.UTF-8
 
 #Update system and install packages
 RUN [ "apt-get", "-q", "update" ]

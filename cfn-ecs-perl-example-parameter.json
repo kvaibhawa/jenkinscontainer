@@ -1,7 +1,7 @@
 {
   "Parameters" : {
     "LaunchType":"Fargate",
-    "RestreamerImage":"restreamer-kpl",
+    "RestreamerImage":"demoperlcontainer",
     "DesiredCount":"1",
     "ContainerPort":"8888",
     "InstanceType":"t2.large",
